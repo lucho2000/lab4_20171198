@@ -16,7 +16,7 @@
 
     <style>
         body {
-            background-image: url(/static/fondo.jpg);
+            background-image: url();
         }
     </style>
     <title >Teletravel</title>
@@ -27,26 +27,26 @@
             <div class="col-3">
             </div>
             <div class="col-6 card mt-5 bg-black">
-
+                <div th:if="${usr != null}" th:text="${usr}" class="alert alert-success" role="alert"></div>
                 <div class="card-body aqua-gradient">
-                    <img th:src="@{}" alt="imagenLogo" class="img-fluid rounded-circle w-50" >
+                    <img th:src="@{/fondo.png}" alt="imagenLogo" class="img-fluid rounded-circle w-50" >
                     <h3 class="text-white mt-2">Bienvenido a Teletravel</h3>
-                    <form action="login/inicioSesion" method="post">
+                    <form th:action="@{/homepage}" method="post">
 
-                    <input type="" name="correo" class="form-control mt-3" placeholder="Correo">
-                    <input type="" name="contrasena" class="form-control mt-3" placeholder="Contraseña">
+                        <input type="email" name="email" class="form-control mt-3" placeholder="Correo">
+                        <input type="password" name="contrasena" class="form-control mt-3" placeholder="Contraseña">
 
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6">
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-outline-primary mt-4 mb-2 rounded-pill">
-                                        Ingresar</button>
+                        <div class="row">
+                            <div class="col-3"></div>
+                            <div class="col-6">
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-outline-primary mt-4 mb-2 rounded-pill">
+                                            Ingresar</button>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-3"></div>
-                    </div>
+                            <div class="col-3"></div>
+                        </div>
                     </form>
                 </div>
             </div>

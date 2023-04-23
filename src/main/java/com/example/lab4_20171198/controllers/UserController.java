@@ -3,13 +3,15 @@ package com.example.lab4_20171198.controllers;
 
 import com.example.lab4_20171198.entity.User;
 import com.example.lab4_20171198.repository.UserRepository;
+import com.example.lab4_20171198.repository.VueloRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Optional;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -18,51 +20,29 @@ public class UserController {
 
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
+
     }
 
-
-    //@GetMapping("/nuevo")
-    /*public String nuevo() {
-        return "hospital/nuevohospital";
-    }*/
-    @GetMapping("/homepage")
-    public String homePage(Model model){
-
-        return "/homePage";
-    }
-
-
-    @GetMapping("/")
-    public String inicio(Model model){
-
+    @GetMapping("/login")
+    public String inicio(){
         return "inicio";
     }
+    @PostMapping ("/homepage")
+    public String inicio(RedirectAttributes attr, @RequestParam("email") String correo, @RequestParam("contrasena") String contrasena){
 
-    @GetMapping("/")
-    public String compararUsers(Model model, @RequestParam("name") String name, @RequestParam("contrasena") String contrasena ){
+            User user = userRepository.compararUsers(correo,contrasena);
 
-        model.addAttribute("users", userRepository.findAll());
-
-        Optional<User> optUser = userRepository.compararUsers(name, contrasena);
-
-        if (optUser.isPresent()) {
-            User user = optUser.get();
-            model.addAttribute("user", user);
-            return "/homePage";
-        } else {
-            return "redirect:/inicio";
-        }
-
+            if (user != null){
+                attr.addFlashAttribute("usr", user);
+                return "redirect:/home";
+            }
+            else {
+                return "redirect:/login";
+            }
     }
 
 
-    @PostMapping("/guardar")
-    public String guardar(User user) {
-        userRepository.save(user);
 
-
-        return "redirect:/listar";
-    }
 
 
 }

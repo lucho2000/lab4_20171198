@@ -12,6 +12,7 @@ public class Reserva {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idreserva")
     private Integer idReserva;
 

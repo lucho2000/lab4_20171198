@@ -15,10 +15,11 @@ import java.sql.Date;
 public class Vuelo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idvuelo")
     private Integer idVuelo;
 
-    @Column(name = "username")
+    @Column(name = "origen")
     private String origen;
 
     private String destino;
