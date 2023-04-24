@@ -85,7 +85,7 @@
               caminata, montañismo,
               hiking o trekking.</p>
 
-            <button type="submit" class="btn btn-success" data-target="#miModal" data-toggle="modal">Comprar</button>
+            <a class="btn btn-success btn-reserva" th:href="@{'/guardar?id='+${vuelo.idVuelo}+'&user='+${usr.iduser}}">Comprar</a>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@
         </div>
       </div>
     </div>
-
+    <input type="hidden" id="modal" th:if="${modal != null}" th:value="${modal}">
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -123,7 +123,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+  <script>
+    var modal = $("#modal").val();
+    if(modal == "S"){
+      $("#miModal").toggle();
+    }
+  </script>
 
 </body>
 
